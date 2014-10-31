@@ -14,4 +14,5 @@ color.rgbToHex
 ```js
 var element = document.getElementById('element');
 element.style.backgroundColor = color.rgbToHex(114, 85, 199);
+element.style.backgroundColor = color.rgbToHex([114, 85, 199]);
 ```
