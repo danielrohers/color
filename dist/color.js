@@ -33,18 +33,23 @@
       ((0|(1<<8) + b + (256 - b) * percent / 100).toString(16)).substr(1)).toUpperCase();
   };
 
+  var _convertRgbToHex = function (color) {
+    var r = parseInt(color[0], 10).toString(16);
+    var g = parseInt(color[1], 10).toString(16);
+    var b = parseInt(color[2], 10).toString(16);
+
+    r = r.length === 1 ? '0' + r : r;
+    g = g.length === 1 ? '0' + g : g;
+    b = b.length === 1 ? '0' + b : b;
+
+    return ('#' + r + g + b).toUpperCase();
+  };
+
   var _rgbToHex = function (color) {
     if(color.indexOf('rgb') === 0) {
-      color = color.replace('rgb(','').replace(')','').split(',');
-        var r = parseInt(color[0], 10).toString(16);
-        var g = parseInt(color[1], 10).toString(16);
-        var b = parseInt(color[2], 10).toString(16);
-
-        r = r.length === 1 ? '0' + r : r;
-        g = g.length === 1 ? '0' + g : g;
-        b = b.length === 1 ? '0' + b : b;
-
-        return ('#' + r + g + b).toUpperCase();
+      return _convertRgbToHex(color.replace('rgb(','').replace(')','').split(','));
+    } if (Object.prototype.toString.call(color) === '[object Array]') {
+      return _convertRgbToHex(color);
     }
   }
 
